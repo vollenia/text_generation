@@ -24,7 +24,7 @@ The model is trained by taking the tokenized text and turning it into a dictiona
 After a language model has been trained its knowledge can be used to generate text. The function that is central to this process is _p_next_. The goal of this function is to search the model and return a dictionary of possible words and their probabilities of appearing in the given context / being the next generated word.
 
 The first step that is implemented in order for the whole generation process to work is the creation of the history for
-the initial history / search. This is done by creating "None"-Tokens for the length of n-1 as DAP symbols. This history is then used for the initial search.
+the initial history / search. This is done by creating "None"-Tokens for the length of n-1 as padding. This history is then used for the initial search.
 
 For the cese of a specific history not being covered by the language model, a history reduction mechanism is implemented.
 In order to still have a successful search, the history of n-1 items is at first turned into a history of n-2 items, thereby reducing the amount of words required.
@@ -34,12 +34,11 @@ This approach is an easy solution which does not require re-training a model and
 
 After a match has been found, the function _normalize_ is called on the search results. This function takes the
 resulting dictionary of the search from p_next and while leaving its keys, turns its values into probabilities. These probabilities are then returned by p_next.
-The funcion _generate_ then uses this normalized dictionary and feeds it to the function _sample_. _Sample_ is function that indirectly
+The funcion _generate_ then uses this normalized dictionary and feeds it to the function _sample_. _Sample_ is a function that indirectly
 uses the output of p_next and selects one of the keys. This is done by implementing the built in random module while also taking the probabilities of the words into account.
 
 The final step consists of _generate_ appending the output of _sample_ to a list. After one iteration of _generate_ is
-completed, the new history of n-1 is taken as history for the next generation. _Generate_ is repeatedly called until a
-**DAP** symbol is matched.
+completed, the new history of n-1 is taken as history for the next generation. _Generate_ is repeatedly called until a padding symbol is matched again.
 
 ((z(In this context the probability of an infinite generation loop is very unlikely but still
 possible. Therefore a safety feature was implemented. It activates when the length of the generated text exceeds 500
