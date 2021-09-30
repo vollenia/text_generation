@@ -4,7 +4,7 @@ from lm import *
 # Selecting text data for training
 text = str(input('STEP 1/4 | Which text would you like to use as training data?'+'\n'+\
                        '           File name: '))
-tokens = (tokenize(text))
+tokens, proper_names = (tokenize(text))
 
 # Selecting the type of n-Gram model
 ngram_type = int(input('STEP 2/4 | Which type of n-gram LM would you like to create?'+'\n'+\
@@ -18,7 +18,7 @@ nr_of_texts = int(input('STEP 3/4 | How many lines would you like to generate?'+
 texts = []
 for text in range(nr_of_texts):
     generated_text = ngram_lm.generate()
-    fluent2 = (detokenize(generated_text))
+    fluent2 = (detokenize(generated_text, proper_names))
     texts.append(fluent2)
     texts.append('-'*10)   
 final_texts = '\n'.join(texts)
