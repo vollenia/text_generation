@@ -106,10 +106,10 @@ class LanguageModel(object):
                         selected_word = sample(possible_words)
                         if selected_word == None:
                                 break
-                        # Artificial barriercin case of infinite loop (very unlikely but possible)
+                        # Artificial barrier
                         elif len(new_text) > 500 and selected_word in stop:
                                 new_text.append(selected_word)
-                                new_text.append('-- this is not the real end!!!')
+                                #new_text.append('--ARTIFICIAL_BARRIER--')
                                 break
                         else:
                                 new_text.append(selected_word)

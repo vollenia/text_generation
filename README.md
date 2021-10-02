@@ -12,9 +12,8 @@ In what follows, a more detailed overview over the functionality of the text gen
 
 ### 1. Tokenizing the training data (corpus.py)
 The goal of the function _tokenize_ is to take a _.txt_ document and split it's content into tokens. This is achieved by reading the document line by line while stripping lines with text of line breaks. This process also aims at identifying punctuation marks and tokenizing them as individual tokens. Identifying punctuatuion marks ,however, requires them to be split from the token they are trailng. This is achieved by using a dictionary where the keys represent punctuation mark and the values a whitespace plus the corresponding punctuation mark (e.g.: ‘.’ : ‘ .’). This modification enables the punctuation marks to be affected during tokanization when the string is split using _whitespace_ as a separator.
-Ultimately, this function creates a list of lists where each list consists of tokens from the corresponding line.
-
-((((Another approach to improve the results of the whole system, in particular of the detokenization, was to try to identify proper names in the training data. In order to test whether this would be achievable, a simplified subset of the training data was created where each line consisted of only one sentence. The idea was to look only at those words that are capitalized despite not being in sentence initial position. This approach failed due to inconsistencies in the capitalization in the dataset (e.g.: … people Choose Caesar for … ; … weak words Have struck … ; … is it physical To walk unbraced …). For the sake of authenticity the code used has been left in tokenize.)))
+In addition to that, all capitalized tokens not in sentence initial position are assumed to be proper names.
+Ultimately,the tokanization process returns a set of proper names as well as a list of lists where each list consists of tokens from the corresponding line.
 
 ### 2. Training the language model
 The whole system revolves around the _LanguageModel_ class. It is instantiated with the integer variable _n_ as the parameter which determines the structure of the generated n-gram model.
@@ -39,13 +38,10 @@ uses the output of p_next and selects one of the keys. This is done by implement
 
 The final step consists of _generate_ appending the output of _sample_ to a list. After one iteration of _generate_ is
 completed, the new history of n-1 is taken as history for the next generation. _Generate_ is repeatedly called until a padding symbol is matched again.
-
-((z(In this context the probability of an infinite generation loop is very unlikely but still
-possible. Therefore a safety feature was implemented. It activates when the length of the generated text exceeds 500
-items, waits for the next punctuation mark, marks the new end and break the generation process.)))
+Additionally, an artificial text size barrier is implemented. In case the length of the generated text exceeds the number of 500 tokens, the generation process is stopped after the next punctuation mark.
 
 ### 4. Detokenizing newly generated sequences (corpus.py)
 The goal of the function _detokenize_ is to take the final output of _generate_ and turn it into a string.
-The first step consists of re-capitalizing specific words. In this process, words that followed specific punctuation marks, incorporating the capitalization of the first word in a sentence, are capitalized. In addition to that, all instances of I (I, I'd, I'll, I'm, I've) are capitalized as well.
+The first step consists of re-capitalizing of words. In this process, words that follow specific punctuation marks, incorporating the first word in a sentence, are capitalized. In addition to that, all instances of I (I, I'd, I'll, I'm, I've) are capitalized as well. Lastly, the set of proper names collected during tokenization is used to match and re-capitalize tokens.
 
-In order to avoid whitespaces between words and punctuation marks uppon joining the tokens into a string, The punctuation marks are identified and appended to the preceeding token.
+In order to avoid whitespaces between words and punctuation marks uppon joining the tokens into a string, the punctuation marks are identified and appended to the preceeding token.
