@@ -4,7 +4,7 @@
 The goal of this project is to train a language model on a random text and generate new text by utilizing this language model.
 
 To run the the code execute main.py and follow the instructions. In this process you will be prompted to enter the name of the text file that you want to use for training, the type of language model you want to create from this text, how many new sentences you want to generate and wheather you would like to save these newly generated sentences.
-Only built-in modules are used and the code was tested to run under Python 3.8.10.
+Only built-in modules are used and the code was tested to run under Python 3.8.10.  
 This is all you need to know to train language models and generate new text.  
 
 ## Modules Overview
@@ -43,6 +43,5 @@ Additionally, an artificial text size barrier is implemented. In case the length
 
 ### 4. Detokenizing newly generated sequences (corpus.py)
 The goal of the function _detokenize_ is to take the final output of _generate_ and turn it into a string.
-The first step consists of re-capitalizing of words. In this process, words that follow specific punctuation marks, incorporating the first word in a sentence, are capitalized. In addition to that, all instances of I (I, I'd, I'll, I'm, I've) are capitalized as well. Lastly, the set of proper names collected during tokenization is used to match and re-capitalize tokens.
-
+The first step consists of re-capitalizing of words. In this process, words that follow specific punctuation marks, incorporating the first word in a sentence, are capitalized. In addition to that, all instances of I (I, I'd, I'll, I'm, I've) are capitalized as well. Lastly, the set of proper names collected during tokenization is used to match and re-capitalize tokens.  
 In order to avoid whitespaces between words and punctuation marks uppon joining the tokens into a string, the punctuation marks are identified and appended to the preceeding token.
