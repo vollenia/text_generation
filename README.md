@@ -45,3 +45,8 @@ Additionally, an artificial text size barrier is implemented. In case the length
 The goal of the function _detokenize_ is to take the final output of _generate_ and turn it into a string.
 The first step consists of re-capitalizing of words. In this process, words that follow specific punctuation marks, incorporating the first word in a sentence, are capitalized. In addition to that, all instances of I (I, I'd, I'll, I'm, I've) are capitalized as well. Lastly, the set of proper names collected during tokenization is used to match and re-capitalize tokens.  
 In order to avoid whitespaces between words and punctuation marks uppon joining the tokens into a string, the punctuation marks are identified and appended to the preceeding token.
+
+## Results
+* "Dear Celia, but I will bring you word, good Mistress Anne, yourself must break my oath, to hide the sun dance. Hark, in me what strange, that wouldst thou have me?"
+* "I am heart-burned an hour, and, for want of rain, I am, necessity commands me name myself attach thee for a hot January."
+
