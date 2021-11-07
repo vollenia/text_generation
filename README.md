@@ -3,7 +3,7 @@
 ## Summary
 The goal of this project is to train a language model on a random text and generate new text by utilizing this language model.
 
-To run the the code execute main.py and follow the instructions. In this process you will be prompted to enter the name of the text file that you want to use for training, the type of language model you want to create from this text, how many new sentences you want to generate and wheather you would like to save these newly generated sentences.
+To run the the code execute _main.py_ and follow the instructions. In this process you will be prompted to enter the name of the text file that you want to use for training, the type of language model you want to create from this text, how many new sentences you want to generate and wheather you would like to save these newly generated sentences.
 Only built-in modules are used and the code was tested to run under Python 3.8.10.  
 This is all you need to know to train language models and generate new text.  
 
