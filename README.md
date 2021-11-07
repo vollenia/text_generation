@@ -16,11 +16,11 @@ The goal of the function _tokenize_ is to take a _.txt_ document and split it's 
 In addition to that, all capitalized tokens not in sentence initial position are assumed to be proper names.
 Ultimately,the tokanization process returns a set of proper names as well as a list of lists where each list consists of tokens from the corresponding line.
 
-### 2. Training the language model
+### 2. Training the language model (lm.py)
 The whole system revolves around the _LanguageModel_ class. It is instantiated with the integer variable _n_ as the parameter which determines the structure of the generated n-gram model.
 The model is trained by taking the tokenized text and turning it into a dictionary containing the history of length n-1 of a word as key and a dictionary of all the words having this history with the corresponding counts as value. In order to process the data and create this dictionary, the tokenized text is split into overlapping tuples of length _n_. The overlap is defined as the shift by one item after the creation of a tuple. 
 
-### 3. Generating new token sequences
+### 3. Generating new token sequences (lm.py)
 After a language model has been trained its knowledge can be used to generate text. The function that is central to this process is _p_next_. The goal of this function is to search the model and return a dictionary of possible words and their probabilities of appearing in the given context / being the next generated word.
 
 The first step that is implemented in order for the whole generation process to work is the creation of the history for
